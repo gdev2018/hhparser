@@ -14,18 +14,18 @@ start_time = datetime.now()
 # вытащим перечень id интересующих банков из csv-файла
 import csv
 banki = []
-with open("assets/bankiru.csv", "r") as file:
+with open("assets/bankiru2.csv", "r") as file:
     bankiru = csv.DictReader(file, delimiter=';')
     for bank in bankiru:
         # if (bank['employer_id'] == '3529'):
-        if (bank['employer_id'] != ""):
+        if (bank['employer_id2'] != ""):
             # print(bank['employer_id'], "-", bank['Название банка'])
             banki.append(bank)
             # print(banki)
 
 for bank in banki:
-    print(bank['employer_id'], "-", bank['Название банка'])
-    employer_id = bank['employer_id']
+    print(bank['employer_id2'], "-", bank['employer_name'])
+    employer_id = bank['employer_id2']
     url = 'https://api.hh.ru/vacancies?employer_id=' + str(employer_id)
     request = requests.get(url).json()
     pages = request['pages']
@@ -65,7 +65,7 @@ for bank in banki:
     print("saving to json...")
     today = datetime.now().strftime("%Y%m%d")
     import json # https://stackoverflow.com/questions/7100125/storing-python-dictionaries
-    with open("outputs/vacancies_id" + str(employer_id) + "_dt" + today + ".json", "w") as outfile:
+    with open("outputs/" + bank['employer_type'] + "_vacancies_id" + str(employer_id) + "_dt" + today + ".json", "w") as outfile:
         json.dump(vacancies, outfile)
 
     # # load from json
