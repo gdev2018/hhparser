@@ -1,5 +1,7 @@
 # import numpy as np
 # import pandas as pd
+import os
+
 import requests
 import re   #regex
 # from tqdm import tqdm_notebook
@@ -14,18 +16,22 @@ start_time = datetime.now()
 # вытащим перечень id интересующих банков из csv-файла
 import csv
 banki = []
-with open("assets/bankiru2.csv", "r") as file:
+with open("assets/bankiru3.csv", "r") as file:
     bankiru = csv.DictReader(file, delimiter=';')
     for bank in bankiru:
         # if (bank['employer_id'] == '3529'):
-        if (bank['employer_id2'] != ""):
+        if (bank['employer_id'] != ""):
             # print(bank['employer_id'], "-", bank['Название банка'])
             banki.append(bank)
             # print(banki)
 
+today = datetime.now().strftime("%Y%m%d")
+path = "outputs/" + today + "/"
+os.makedirs(path)
+
 for bank in banki:
-    print(bank['employer_id2'], "-", bank['employer_name'])
-    employer_id = bank['employer_id2']
+    print(bank['employer_id'], "-", bank['employer_name'])
+    employer_id = bank['employer_id']
     url = 'https://api.hh.ru/vacancies?employer_id=' + str(employer_id)
     request = requests.get(url).json()
     pages = request['pages']
@@ -63,9 +69,8 @@ for bank in banki:
 
 
     print("saving to json...")
-    today = datetime.now().strftime("%Y%m%d")
     import json # https://stackoverflow.com/questions/7100125/storing-python-dictionaries
-    with open("outputs/" + bank['employer_type'] + "_vacancies_id" + str(employer_id) + "_dt" + today + ".json", "w") as outfile:
+    with open(path + bank['employer_type'] + "_vacancies_id" + str(employer_id) + ".json", "w") as outfile:
         json.dump(vacancies, outfile)
 
     # # load from json
