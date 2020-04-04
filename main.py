@@ -16,7 +16,7 @@ start_time = datetime.now()
 # вытащим перечень id интересующих банков из csv-файла
 import csv
 banki = []
-with open("assets/bankiru3.csv", "r") as file:
+with open("inputs/employers_in.csv", "r") as file:
     bankiru = csv.DictReader(file, delimiter=';')
     for bank in bankiru:
         # if (bank['employer_id'] == '3529'):
