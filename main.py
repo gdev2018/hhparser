@@ -85,14 +85,15 @@ def main():
                 # # load from json
                 # with open('assets\data.json', 'r') as infile:
                 #    data = json.load(infile)
-            except requests.Timeout as err:
+            except Exception as err:
+            # except requests.Timeout as err:
                 errors_count = errors_count + 1
                 print(err)
                 continue
-            except requests.RequestException as err:
-                errors_count = errors_count + 1
-                print(err)
-                continue
+            # except requests.RequestException as err:
+            #     errors_count = errors_count + 1
+            #     print(err)
+            #     continue
     return errors_count
     # if errors_count > 0:
     #     raise ValueError("errors_count=" + str(errors_count) + " I am tring again...")
