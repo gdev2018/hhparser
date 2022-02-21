@@ -1,5 +1,10 @@
 # import numpy as np
 # import pandas as pd
+
+# todo Обход captcha
+# В заголовках передавайте referrer. Если вы используете requests.session(), тогда сбрасывайте cookies при смене ip.
+# https://qna.habr.com/q/769191
+
 import os
 
 import requests
