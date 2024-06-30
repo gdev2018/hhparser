@@ -91,7 +91,7 @@ def main():
                 # with open('assets\data.json', 'r') as infile:
                 #    data = json.load(infile)
             except Exception as err:
-            # except requests.Timeout as err:
+                # except requests.Timeout as err:
                 errors_count = errors_count + 1
                 print(err)
                 continue
@@ -102,6 +102,7 @@ def main():
     return errors_count
     # if errors_count > 0:
     #     raise ValueError("errors_count=" + str(errors_count) + " I am tring again...")
+
 
 # repeat all script if errors fired
 for i in range(1, 100):
