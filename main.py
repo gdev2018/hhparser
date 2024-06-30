@@ -6,11 +6,11 @@
 # https://qna.habr.com/q/769191
 
 import os
-
-import requests
 import re  # regex
 # from tqdm import tqdm_notebook
 from datetime import datetime
+
+import requests
 
 start_time = datetime.now()
 
